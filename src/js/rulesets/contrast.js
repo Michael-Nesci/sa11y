@@ -306,7 +306,7 @@ export function suggestColorAPCA(color, background, fontWeight, fontSize) {
   }
 
   let previousColor = color;
-  let lastValidColor = null;
+  let lastValidColor = adjustedColor;
   let bestContrast = contrast.ratio;
 
   // Loop parameters.
@@ -353,7 +353,7 @@ export function generateColorSuggestion(container) {
     const details = JSON.parse(colorObject);
     const { color, background, fontWeight, fontSize, isLargeText } = details;
 
-    if (color && background !== 'image') {
+    if (color && background && background !== 'image') {
       const suggested = Constants.Global.contrastAPCA
         ? suggestColorAPCA(color, background, fontWeight, fontSize)
         : suggestColorWCAG(color, background, isLargeText);
